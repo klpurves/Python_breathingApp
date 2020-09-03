@@ -16,6 +16,9 @@ KLP
 #And data features:
 #added time stamping and other features.
 
+#---------------------------------------------------------------------------
+#Libraries
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -45,8 +48,7 @@ G = (X3**2 + Y3**2)*sinT3
 # Set up the figure and axis
 fig, ax = plt.subplots(figsize=(6, 6))
 
-if animation_type not in ['line', 'scatter']:
-    ax.set_aspect('equal')
+ax.set_aspect('equal')
 
 
 # ----------------------------------------------------------------------------
