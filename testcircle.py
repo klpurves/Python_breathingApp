@@ -9,8 +9,12 @@ KLP
 09/2012"""
 
 
-#NOTE: taken code with minor adaptations from blog example of animation using matplotlib
-#https://gist.github.com/hugke729/ac3cf36500f2f0574a6f4ffe40986b4f
+#NOTE: taken base code from blog example of animation using matplotlib
+#https://gist.github.com/hugke729/ac3cf36500f2f0574a6f4ffe40986b4f.
+#Major adaptations, including animation featues:
+#Wrapped withing an animate function and added pause functionality
+#And data features:
+#added time stamping and other features.
 
 import numpy as np
 import matplotlib.pyplot as plt
