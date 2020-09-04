@@ -23,6 +23,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
+import csv
 
 # Use matplotlib ggplot stylesheet if available
 try:
@@ -80,7 +81,6 @@ def run_animation():
         global count
         count += 1
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
-        print(current_datetime)
         timedata[count] = current_datetime
         nonlocal anim_running
         if anim_running:
@@ -95,6 +95,10 @@ def run_animation():
     anim = FuncAnimation(fig, animate, interval=300, frames=len(t)-1, repeat=True)
 
     plt.show()
-    print(timedata)
+
+    # write the dixctionary to csv
+    with open('test_time.csv', 'w') as f:
+        for key in timedata.keys():
+            f.write("%s,%s\n"%(key,timedata[key]))
 
 run_animation()
