@@ -20,19 +20,17 @@ KLP
 #Libraries
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
+import csv
 
 # Use matplotlib ggplot stylesheet if available
 try:
     plt.style.use('ggplot')
 except:
     pass
-
-# Set which type of animation will be plotted. One of:
-#  pcolor,  contour
-animation_type = 'contour'
 
 # Create three-dimensional array of data G(x, z, t)
 x = np.linspace(-4, 4, 91)
@@ -47,39 +45,46 @@ G = (X3**2 + Y3**2)*sinT3
 # ----------------------------------------------------------------------------
 # Set up the figure and axis
 fig, ax = plt.subplots(figsize=(6, 6))
-
 ax.set_aspect('equal')
 
+# add title
+plt.title("breathe in")
+
+# remove background
+fig.patch.set_visible(False)
+ax.axis('off')
 
 # ----------------------------------------------------------------------------
-if animation_type == 'pcolor':
-    cax = ax.pcolormesh(x, y, G[:-1, :-1, 0], vmin=-4, vmax=1, cmap='Blues')
-    fig.colorbar(cax)
+# Set up options and animate function to apply these on repeat
 
-    def animate(i):
-        cax.set_array(G[:-1, :-1, i].flatten())
+contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu'}
+cax = ax.contour(x, y, G[..., 0], **contour_opts)
+
+def animate(i):
+    ax.collections = []
+    ax.contour(x, y, G[..., i], **contour_opts)
 
 # ----------------------------------------------------------------------------
+# Set up dictionary to hold data
+
+timedata = {}
+
+# Set up count variable to get number of clicks
+count = 0
 
 
-if animation_type == 'contour':
-    # Keyword options used in every call to contour
-    contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu', 'lw': 2}
-    cax = ax.contour(x, y, G[..., 0], **contour_opts)
-
-    def animate(i):
-        ax.collections = []
-        ax.contour(x, y, G[..., i], **contour_opts)
-
-
-## set up animarion function including play/pause
+## set up animation function including play/pause
 
 def run_animation():
     anim_running = True
 
     def onClick(event):
+        global count
+        count += 1
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
-        print(current_datetime)
+        date = current_datetime.strftime('%Y-%m-%d')
+        time = current_datetime.time().strftime('%H:%M:%S.%f')
+        timedata[count] = date, time
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
@@ -93,5 +98,13 @@ def run_animation():
     anim = FuncAnimation(fig, animate, interval=300, frames=len(t)-1, repeat=True)
 
     plt.show()
+
+    # write the dictionary to csv
+    with open('test_time.csv', 'w') as f:
+        f.write("{0},{1},{2}\n".format("ClickCount","Date","Time"))
+        for key in timedata.keys():
+            values = timedata[key]
+
+            f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 run_animation()
