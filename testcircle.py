@@ -25,13 +25,17 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
 from matplotlib.widgets import Button
+import matplotlib.patches as patches
 import csv
+import matplotlib as mpl
 
 # Use matplotlib ggplot stylesheet if available
 try:
     plt.style.use('ggplot')
 except:
     pass
+
+mpl.rcParams['toolbar'] = 'None'
 
 # Create three-dimensional array of data G(x, z, t)
 x = np.linspace(-4, 4, 91)
@@ -57,13 +61,30 @@ ax.axis('off')
 
 # ----------------------------------------------------------------------------
 # Set up options and animate function to apply these on repeat
+rect = patches.Rectangle((0.47, 0.45, 0.1, 0.075),2,2,linewidth=1,edgecolor='r',facecolor='none')
 
 contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu'}
 cax = ax.contour(x, y, G[..., 0], **contour_opts)
 
 def animate(i):
-    ax.collections = []
-    ax.contour(x, y, G[..., i], **contour_opts)
+    print(i)
+    if i < 10:
+        plt.pause(2)
+        axwait = plt.axes([0.47, 0.45, 0.1, 0.075])
+        bwait = Button(axwait, 'Wait',
+        color = "grey", hovercolor = "#489FA7")
+        ax.collections = []
+        ax.contour(x, y, G[..., i], **contour_opts)
+    else:
+        bwait.remove()
+        axplay = plt.axes([0.47, 0.45, 0.1, 0.075])
+        bplay = Button(axplay, 'Press',
+        color = "grey", hovercolor = "#489FA7")
+        ax.collections = []
+        ax.contour(x, y, G[..., i], **contour_opts)
+
+
+
 
 # ----------------------------------------------------------------------------
 # Set up dictionary to hold data
@@ -76,20 +97,9 @@ count = 0
 
 ## set up animation function including play/pause
 
-
-
 def run_animation():
-    anim_running = False
-    if anim_running == False:
-        axplay = plt.axes([0.47, 0.45, 0.1, 0.075])
-        bplay = Button(axplay, 'Play',
-        color = "grey", hovercolor = "#489FA7")
-        anim_running = True
-    else:
-        axpause = plt.axes([0.47, 0.45, 0.1, 0.075])
-        bpause = Button(axpause, 'Pause')
-        anim_running = False
 
+    anim_running = True
 
     def onClick(event):
         global count
@@ -108,7 +118,7 @@ def run_animation():
 
     fig.canvas.mpl_connect('button_press_event', onClick)
 
-    anim = FuncAnimation(fig, animate, interval=430, frames=len(t)-1, repeat=True)
+    anim = FuncAnimation(fig, animate, interval=200, frames=len(t)-1, repeat=True)
 
     plt.show()
 
