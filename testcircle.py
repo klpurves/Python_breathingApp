@@ -20,6 +20,7 @@ KLP
 #Libraries
 
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
@@ -100,8 +101,10 @@ def run_animation():
 
     # write the dictionary to csv
     with open('test_time.csv', 'w') as f:
+        f.write("{0},{1},{2}\n".format("ClickCount","Date","Time"))
         for key in timedata.keys():
             values = timedata[key]
+
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 run_animation()
