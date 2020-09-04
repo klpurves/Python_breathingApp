@@ -26,8 +26,15 @@ from matplotlib.animation import FuncAnimation
 from datetime import datetime
 from matplotlib.widgets import Button
 import matplotlib.patches as patches
+import time
 import csv
 import matplotlib as mpl
+import tkinter as tk
+from tkinter import simpledialog
+
+ROOT = tk.Tk()
+ROOT.withdraw()
+
 
 # Use matplotlib ggplot stylesheet if available
 try:
@@ -49,11 +56,8 @@ G = (X3**2 + Y3**2)*sinT3
 
 # ----------------------------------------------------------------------------
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6, 6))
+fig, ax = plt.subplots(figsize=(10, 10))
 ax.set_aspect('equal')
-
-# add title
-plt.title("breathe and click")
 
 # remove background
 fig.patch.set_visible(False)
@@ -61,29 +65,14 @@ ax.axis('off')
 
 # ----------------------------------------------------------------------------
 # Set up options and animate function to apply these on repeat
-rect = patches.Rectangle((0.47, 0.45, 0.1, 0.075),2,2,linewidth=1,edgecolor='r',facecolor='none')
 
-contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu'}
+contour_opts = {'levels': np.linspace(-9, 9, 12), 'cmap':'RdBu'}
 cax = ax.contour(x, y, G[..., 0], **contour_opts)
 
 def animate(i):
-    print(i)
-    if i < 10:
-        plt.pause(2)
-        axwait = plt.axes([0.47, 0.45, 0.1, 0.075])
-        bwait = Button(axwait, 'Wait',
-        color = "grey", hovercolor = "#489FA7")
-        ax.collections = []
-        ax.contour(x, y, G[..., i], **contour_opts)
-    else:
-        bwait.remove()
-        axplay = plt.axes([0.47, 0.45, 0.1, 0.075])
-        bplay = Button(axplay, 'Press',
-        color = "grey", hovercolor = "#489FA7")
-        ax.collections = []
-        ax.contour(x, y, G[..., i], **contour_opts)
-
-
+    ax.collections = []
+    ax.contour(x, y, G[..., i], **contour_opts)
+    time.sleep(0.2)
 
 
 # ----------------------------------------------------------------------------
@@ -101,6 +90,10 @@ def run_animation():
 
     anim_running = True
 
+    axpress = plt.axes([0.47, 0.45, 0.1, 0.075])
+    bpress = Button(axpress, 'Press',
+    color = "grey", hovercolor = "#489FA7")
+
     def onClick(event):
         global count
         count += 1
@@ -111,14 +104,17 @@ def run_animation():
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
+            # add title
+            plt.title("breathe")
             anim_running = False
         else:
             anim.event_source.start()
             anim_running = True
+            plt.title("hold")
 
     fig.canvas.mpl_connect('button_press_event', onClick)
 
-    anim = FuncAnimation(fig, animate, interval=200, frames=len(t)-1, repeat=True)
+    anim = FuncAnimation(fig, animate, interval=100, frames=len(t)-1, repeat=True)
 
     plt.show()
 
@@ -130,4 +126,12 @@ def run_animation():
 
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
-run_animation()
+
+
+
+# the input dialog
+USER_INP = simpledialog.askstring(title="Start task",
+                                  prompt="Press any key then press enter to start the task")
+
+if USER_INP != "":
+    run_animation()
