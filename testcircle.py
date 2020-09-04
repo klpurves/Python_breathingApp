@@ -48,7 +48,7 @@ fig, ax = plt.subplots(figsize=(6, 6))
 ax.set_aspect('equal')
 
 # add title
-plt.title("breathe in")
+plt.title("breathe and click")
 
 # remove background
 fig.patch.set_visible(False)
@@ -95,7 +95,7 @@ def run_animation():
 
     fig.canvas.mpl_connect('button_press_event', onClick)
 
-    anim = FuncAnimation(fig, animate, interval=300, frames=len(t)-1, repeat=True)
+    anim = FuncAnimation(fig, animate, interval=430, frames=len(t)-1, repeat=True)
 
     plt.show()
 
