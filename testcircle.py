@@ -128,10 +128,9 @@ def run_animation():
 
 
 
-
 # the input dialog
 USER_INP = simpledialog.askstring(title="Start task",
-                                  prompt="Press any key then press enter to start the task")
+                                  prompt="type 'start' and press enter to start the task.\n Close the box when you are done")
 
 if USER_INP != "":
     run_animation()
