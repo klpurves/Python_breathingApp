@@ -65,7 +65,7 @@ def animate(i):
 # ----------------------------------------------------------------------------
 # Set up dictionary to hold data
 
-timedata = dict.fromkeys(["ClickNumber","DateTime"])
+timedata = {}
 
 # Set up count variable to get number of clicks
 count = 0
@@ -81,7 +81,7 @@ def run_animation():
         count += 1
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
         print(current_datetime)
-        print(count)
+        timedata[count] = current_datetime
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
@@ -95,5 +95,6 @@ def run_animation():
     anim = FuncAnimation(fig, animate, interval=300, frames=len(t)-1, repeat=True)
 
     plt.show()
+    print(timedata)
 
 run_animation()
