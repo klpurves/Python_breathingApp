@@ -24,6 +24,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
+from matplotlib.widgets import Button
 import csv
 
 # Use matplotlib ggplot stylesheet if available
@@ -75,8 +76,20 @@ count = 0
 
 ## set up animation function including play/pause
 
+
+
 def run_animation():
-    anim_running = True
+    anim_running = False
+    if anim_running == False:
+        axplay = plt.axes([0.47, 0.45, 0.1, 0.075])
+        bplay = Button(axplay, 'Play',
+        color = "grey", hovercolor = "#489FA7")
+        anim_running = True
+    else:
+        axpause = plt.axes([0.47, 0.45, 0.1, 0.075])
+        bpause = Button(axpause, 'Pause')
+        anim_running = False
+
 
     def onClick(event):
         global count
