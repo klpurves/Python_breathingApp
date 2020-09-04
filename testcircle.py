@@ -81,7 +81,12 @@ def run_animation():
         global count
         count += 1
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
-        timedata[count] = current_datetime
+        date = current_datetime.strftime('%Y-%m-%d')
+        time = current_datetime.time().strftime('%H:%M:%S.%f')
+        print(date)
+        print(time)
+        timedata[count] = date
+        timedata[count] = time
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
@@ -96,7 +101,8 @@ def run_animation():
 
     plt.show()
 
-    # write the dixctionary to csv
+
+    # write the dictionary to csv
     with open('test_time.csv', 'w') as f:
         for key in timedata.keys():
             f.write("%s,%s\n"%(key,timedata[key]))
