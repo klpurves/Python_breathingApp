@@ -56,7 +56,7 @@ ax.axis('off')
 # ----------------------------------------------------------------------------
 # Set up options and animate function to apply these on repeat
 
-contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu', 'lw': 2}
+contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu'}
 cax = ax.contour(x, y, G[..., 0], **contour_opts)
 
 def animate(i):
@@ -83,10 +83,7 @@ def run_animation():
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
         date = current_datetime.strftime('%Y-%m-%d')
         time = current_datetime.time().strftime('%H:%M:%S.%f')
-        print(date)
-        print(time)
-        timedata[count] = date
-        timedata[count] = time
+        timedata[count] = date, time
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
@@ -101,10 +98,10 @@ def run_animation():
 
     plt.show()
 
-
     # write the dictionary to csv
     with open('test_time.csv', 'w') as f:
         for key in timedata.keys():
-            f.write("%s,%s\n"%(key,timedata[key]))
+            values = timedata[key]
+            f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 run_animation()
