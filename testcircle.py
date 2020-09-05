@@ -30,7 +30,8 @@ import time
 import csv
 import matplotlib as mpl
 import tkinter as tk
-from tkinter import simpledialog
+from tkinter import messagebox
+
 
 ROOT = tk.Tk()
 ROOT.withdraw()
@@ -105,12 +106,12 @@ def run_animation():
         if anim_running:
             anim.event_source.stop()
             # add title
-            plt.title("breathe")
+            plt.title("press to breathe")
             anim_running = False
         else:
             anim.event_source.start()
             anim_running = True
-            plt.title("hold")
+            plt.title("press to hold")
 
     fig.canvas.mpl_connect('button_press_event', onClick)
 
@@ -128,9 +129,11 @@ def run_animation():
 
 
 
-# the input dialog
-USER_INP = simpledialog.askstring(title="Start task",
-                                  prompt="type 'start' and press enter to start the task.\n Close the box when you are done")
 
-if USER_INP != "":
-    run_animation()
+"""MsgBox = tk.messagebox.askokcancel(message='Please press OK to start the task. To exit, press cancel',
+icon='info',
+title='Welcome to breath sync task',
+default='ok')
+
+if MsgBox is not None:
+    run_animation()"""
