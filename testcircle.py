@@ -128,7 +128,7 @@ def run_animation():
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 
-
+run_animation()
 
 """MsgBox = tk.messagebox.askokcancel(message='Please press OK to start the task. To exit, press cancel',
 icon='info',
