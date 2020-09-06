@@ -128,12 +128,10 @@ def run_animation():
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 
-
-
-MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
-icon='info',
-title='Welcome to breath sync task',
-default='ok')
+#MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
+#icon='info',
+#title='Welcome to breath sync task',
+#default='ok')
 
 
 run_animation()
