@@ -32,6 +32,7 @@ import matplotlib as mpl
 import tkinter as tk
 from tkinter import messagebox
 
+tk.TK_SILENCE_DEPRECATION=1 # silence the deprecation warning for TKINTER
 
 ROOT = tk.Tk()
 ROOT.withdraw()
@@ -128,10 +129,21 @@ def run_animation():
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
 
 
-#MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
-#icon='info',
-#title='Welcome to breath sync task',
-#default='ok')
+
+MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
+icon='info',
+title='Welcome to breath sync task',
+default='ok')
+
+
+
+def fuck_you_message():
+    x = 12
+    y = 12
+    print(x + y)
+
+if MsgBox == True :
+    fuck_you_message()
 
 
 run_animation()
