@@ -1,9 +1,9 @@
 
 # Breathe event marking task
 
-A very small, very simple task to facilitate event marking of inhales and exhales for the purposes of testing co-ordination with biophysiological wearables.
+A simple task to facilitate event marking of inhales and exhales for the purposes of testing co-ordination with biophysiological wearables.
 
-Aesthetics are simple, intended to help guide the user through breathing and sequential button presses. Instructions limited.
+Aesthetics are intended to help guide the user through breathing and sequential button presses.
 
 Purpose of the task is quick and dirty way to test an idea. Not designed for perfect user interface or use out side of this single purpose at the time being. May improve over time if it proves useful.
 
