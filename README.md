@@ -40,7 +40,7 @@ pip3 install numpy pandas matplotlib.pyplot matplotlib.animation datetime matplo
 
 To start the app, use the command line to navigate to the folder which contains the ```simpleBreathe.py``` file.
 
-Run this script from the command line using python3 ```simpleBreathe.py``` (mac)
+Run this script from the command line using python3 ```python3 simpleBreathe.py``` (mac)
 
 This will initiate the animated breathing task.
 
