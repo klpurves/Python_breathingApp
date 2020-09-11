@@ -29,8 +29,8 @@ import matplotlib.patches as patches
 import time
 import csv
 import matplotlib as mpl
-import tkinter as tk
-from tkinter import messagebox
+#import tkinter as tk
+#from tkinter import messagebox
 
 tk.TK_SILENCE_DEPRECATION=1 # silence the deprecation warning for TKINTER
 
@@ -134,7 +134,6 @@ def run_animation():
 #icon='info',
 #title='Welcome to breath sync task',
 #default='ok')
-
 
 
 #if MsgBox == True :
