@@ -24,13 +24,27 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
+from matplotlib.widgets import Button
+import matplotlib.patches as patches
+import time
 import csv
+import matplotlib as mpl
+#import tkinter as tk
+#from tkinter import messagebox
+
+tk.TK_SILENCE_DEPRECATION=1 # silence the deprecation warning for TKINTER
+
+ROOT = tk.Tk()
+ROOT.withdraw()
+
 
 # Use matplotlib ggplot stylesheet if available
 try:
     plt.style.use('ggplot')
 except:
     pass
+
+mpl.rcParams['toolbar'] = 'None'
 
 # Create three-dimensional array of data G(x, z, t)
 x = np.linspace(-4, 4, 91)
@@ -44,11 +58,8 @@ G = (X3**2 + Y3**2)*sinT3
 
 # ----------------------------------------------------------------------------
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6, 6))
+fig, ax = plt.subplots(figsize=(10, 10))
 ax.set_aspect('equal')
-
-# add title
-plt.title("breathe in")
 
 # remove background
 fig.patch.set_visible(False)
@@ -57,12 +68,14 @@ ax.axis('off')
 # ----------------------------------------------------------------------------
 # Set up options and animate function to apply these on repeat
 
-contour_opts = {'levels': np.linspace(-9, 9, 10), 'cmap':'RdBu'}
+contour_opts = {'levels': np.linspace(-9, 9, 12), 'cmap':'RdBu'}
 cax = ax.contour(x, y, G[..., 0], **contour_opts)
 
 def animate(i):
     ax.collections = []
     ax.contour(x, y, G[..., i], **contour_opts)
+    time.sleep(0.2)
+
 
 # ----------------------------------------------------------------------------
 # Set up dictionary to hold data
@@ -76,7 +89,12 @@ count = 0
 ## set up animation function including play/pause
 
 def run_animation():
+
     anim_running = True
+
+    axpress = plt.axes([0.47, 0.45, 0.1, 0.075])
+    bpress = Button(axpress, 'Press',
+    color = "grey", hovercolor = "#489FA7")
 
     def onClick(event):
         global count
@@ -88,14 +106,18 @@ def run_animation():
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
+            # add title
+            plt.title("press to breathe")
             anim_running = False
         else:
             anim.event_source.start()
             anim_running = True
+            plt.title("press to hold")
 
     fig.canvas.mpl_connect('button_press_event', onClick)
 
-    anim = FuncAnimation(fig, animate, interval=300, frames=len(t)-1, repeat=True)
+    anim = FuncAnimation(fig, animate, interval=100, frames=len(t)-1, repeat=True)
+
 
     plt.show()
 
@@ -106,5 +128,16 @@ def run_animation():
             values = timedata[key]
 
             f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
+
+
+#MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
+#icon='info',
+#title='Welcome to breath sync task',
+#default='ok')
+
+
+#if MsgBox == True :
+#
+#    print("got here")
 
 run_animation()
