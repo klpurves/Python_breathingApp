@@ -98,7 +98,7 @@ There should be 4 relevant task markers for each round
 
 Because this is a minimum viable test of concept, the input and output is not foolproof or elegant. There are important limitations to bear in mind:
 
-1. The csv will overwrite each time you do the task. If we need tio rn the task several times, this is an easy fix - please let me know and I can adapt.
+1. The csv will overwrite each time you do the task. If we need to run the task several times, this is an easy fix - please let me know and I can adapt.
 
 2. There will be an event mark every time you click the centre button. If you click multple times, you will have multiple rows in your dataset. This will make it difficul to keep track of the events tht correspond with the task.
 
