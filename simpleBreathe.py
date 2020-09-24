@@ -29,13 +29,7 @@ import matplotlib.patches as patches
 import time
 import csv
 import matplotlib as mpl
-#import tkinter as tk
-#from tkinter import messagebox
 
-tk.TK_SILENCE_DEPRECATION=1 # silence the deprecation warning for TKINTER
-
-ROOT = tk.Tk()
-ROOT.withdraw()
 
 
 # Use matplotlib ggplot stylesheet if available
