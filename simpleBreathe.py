@@ -95,9 +95,9 @@ def run_animation():
         count += 1
         current_datetime = datetime.now() # NOTE: Acquire the date time (to ms) on each click
         date = current_datetime.strftime('%Y-%m-%d')
-        time = current_datetime.time().strftime('%H:%M:%S.%f')
+        timenow = current_datetime.time().strftime('%H:%M:%S.%f')
         unix=time.mktime(current_datetime.timetuple())
-        timedata[count] = date, time, unix
+        timedata[count] = date, timenow, unix
         nonlocal anim_running
         if anim_running:
             anim.event_source.stop()
@@ -122,7 +122,7 @@ def run_animation():
         for key in timedata.keys():
             values = timedata[key]
 
-            f.write("{0},{1},{2}\n".format(key,values[0],values[1]))
+            f.write("{0},{1},{2},{3}\n".format(key,values[0],values[1],values[2]))
 
 
 #MsgBox = tk.messagebox.askokcancel(message='Welcome to breathing sync task. You will need to breathe in deeply, hold your breath, then breathe out again slowly.\n\nBefore beginning, press the start button in the centre of the moving circles. \nBreathe in as deeply as you can, then press the button again. Hold your breath for a count of 3, then press the button again and breathe out slowly.\n Press the button a final time.\n\n Please press OK to start the task. To exit, press cancel',
