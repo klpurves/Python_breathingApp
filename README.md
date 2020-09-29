@@ -1,5 +1,5 @@
 
-# Breathe event marking task
+# Breath event marking task
 
 A simple task to facilitate event marking of inhales and exhales for the purposes of testing co-ordination with biophysiological wearables.
 
@@ -76,7 +76,7 @@ This will create event makrer 5, marking the end of the first round of the task.
 
 You will end up with a csv file (click_timeStamp.csv) in the same folder as the python task file.
 
-It has 3 columns, click ClickCount, Date and time
+It has 4 columns, ClickCount, Date, time and unix timestamp. 
 
 if done correctly as per instructions above, your click counts will correspond with the following.
 
