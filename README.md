@@ -33,14 +33,14 @@ matplotlib
 if you have python 3 installed, run the following in the command line to install these packages.
 
 ```
-pip3 install numpy pandas matplotlib.pyplot matplotlib.animation datetime matplotlib.widgets matplotlib.patches time csv matplotlib
+pip install numpy pandas matplotlib datetime time csv
 ```
 
 ## Usage
 
 To start the app, use the command line to navigate to the folder which contains the ```simpleBreathe.py``` file.
 
-Run this script from the command line using python3 ```python3 simpleBreathe.py``` (mac)
+Run this script from the command line using python3 ```python simpleBreathe.py``` (mac)
 
 This will initiate the animated breathing task.
 
